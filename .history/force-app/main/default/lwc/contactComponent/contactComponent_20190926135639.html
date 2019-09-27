@@ -1,0 +1,26 @@
+<template>
+    <lightning-card>
+        <div class="slds-m-around_medium slds-grid">    
+            <template if:true={contacts.data}>
+                <!-- Name -->
+               <div class="slds-col slds-truncate slds-button slds-button_neutral" > Name
+                    <template for:each={contacts.data} for:item="contact">
+                        <p  key={contact.Id}>{contact.Name}</p>
+                    </template>
+                </div>
+                <!-- Phone -->
+                <div class="slds-col slds-button_neutral"> Phone
+                        <template for:each={contacts.data} for:item="contact">
+                         <p  key={contact.Id}>{contact.Phone}</p>
+                        </template>
+                </div>
+                <!-- Email -->
+                <div class="slds-col slds-button "> Email
+                        <template for:each={contacts.data} for:item="contact">
+                          <p  key={contact.Id}>{contact.Email}</p>
+                        </template>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,24 @@
+<template>
+        <div class="slds-m-around_medium slds-grid">
+            <template if:true={contacts.data}>
+                <!-- Name -->
+               <div class="slds-col">
+                    <template for:each={contacts.data} for:item="contact">
+                        <p  key={contact.Id}>{contact.Name}</p>
+                    </template>
+                </div>
+                <!-- Phone -->
+                <div class="slds-col">
+                        <template for:each={contacts.data} for:item="contact">
+                         <p  key={contact.Id}>{contact.Phone}</p>
+                        </template>
+                </div>
+                <!-- Email -->
+                <div class="slds-col">
+                        <template for:each={contacts.data} for:item="contact">
+                          <p  key={contact.Id}>{contact.Email}</p>
+                        </template>
+                </div>
+            </template>
+        </div>
+</template>

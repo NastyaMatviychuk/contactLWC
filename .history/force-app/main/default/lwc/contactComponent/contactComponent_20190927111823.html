@@ -1,0 +1,15 @@
+<template>
+        <lightning-card title="Contact Comonent" >
+                <div class="slds-m-around_medium">
+                    <template if:true={data}>
+                        <lightning-datatable data={data}
+                            key-field="Id"
+                            columns={columns}
+                            sorted-by={sortBy}
+                            sorted-direction={sortDirection}
+                            onsort={sortHendler}
+                            hide-checkbox-column="true" >  </lightning-datatable>
+                    </template>
+                </div>
+            </lightning-card>   
+</template>
