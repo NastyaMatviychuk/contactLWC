@@ -103,7 +103,6 @@ return isReverse * ((x > y) - (y > x));
 this.data = parseData;
 
 }
-//------------------------------  L O A D   M O R E 
 
 //----------------------------------U P D A T E 
     handleSave(event) {
