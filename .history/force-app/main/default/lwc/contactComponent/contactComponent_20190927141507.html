@@ -1,0 +1,30 @@
+<template>
+        <lightning-card title="Contact Comonent" >
+                <div class="slds-m-around_medium">
+                    <template if:true={data}>
+                            <lightning-input type="search"
+                                onchange={handleSearchTermChange}
+                                variant="label-hidden"
+                                class="slds-m-bottom_small"
+                                label="Search"
+                                placeholder="Search contact"
+                                value={searchTerm}>
+                            </lightning-input>
+                        <lightning-datatable data={data}
+                            key-field="Id"
+                            columns={columns}
+                            sorted-by={sortBy}
+                            sorted-direction={sortDirection}
+                            onsort={sortHendler}
+                            hide-checkbox-column="true" >  
+                        </lightning-datatable>
+                    </template>
+                </div>
+                
+                <template if:false={hasResults}>
+                    <div class="slds-align_absolute-center slds-m-vertical_small">
+                        This is beary disturbing, we did not find results...
+                    </div>
+                </template>
+            </lightning-card>   
+</template>

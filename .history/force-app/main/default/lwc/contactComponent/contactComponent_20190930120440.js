@@ -165,10 +165,10 @@ this.data = parseData;
     }
 
     createContact() {
-        createContact({contact  : this.contactData})
+        createContact({contactObj: this.contactData})
         .then(result => {
             this.contactData = {};
-            window.console.log('result ===> ' + result);
+            window.console.log('result ===> '+result);
             this.dispatchEvent(new ShowToastEvent({
                 title: 'Success!!',
                 message: 'Contact created Successfully',
@@ -179,7 +179,7 @@ this.data = parseData;
                 this.dispatchEvent(
                     new ShowToastEvent({
                         title: 'Error creating record',
-                        message: error.body.message,
+                        message: error.reduceErrors(error).join(', '),
                         variant: 'error'
                     })
                 );

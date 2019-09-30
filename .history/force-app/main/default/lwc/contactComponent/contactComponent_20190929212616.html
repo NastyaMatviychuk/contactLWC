@@ -1,0 +1,42 @@
+<template>
+        <lightning-card title="Contact Comonent" >
+                <div class="slds-m-around_medium">
+                    <template if:true={data}>
+                            <lightning-input type="search"
+                                onchange={searchData}
+                                variant="label-hidden"
+                                class="slds-m-bottom_small"
+                                label="Search"
+                                placeholder="Search contact here"
+                                value={searchTerm}>
+                            </lightning-input>
+                        <lightning-datatable 
+                            data={data}
+                            key-field="Id"
+                            columns={columns}
+
+                            sorted-by={sortBy}
+                            sorted-direction={sortDirection}
+                            onsort={sortHendler}
+
+                            onsave={handleSave}
+
+                            show-row-number-column
+                            hide-checkbox-column="true" 
+                            draft-values={draftValues}>
+                        </lightning-datatable>
+                        <!-- {loadMoreStatus}
+                          onchange={handleChange} -->
+                    </template>
+                    <lightning-button label = "Create contact" onclick={createAccount}>
+
+                    </lightning-button>
+                </div>
+
+                <template if:false={hasResults}>
+                    <div class="slds-align_absolute-center slds-m-vertical_small">
+                        There are no matches
+                    </div>
+                </template>
+            </lightning-card>   
+</template>

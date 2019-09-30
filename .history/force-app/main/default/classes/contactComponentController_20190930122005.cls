@@ -6,10 +6,11 @@ public with sharing class contactComponentController {
         return [SELECT Id, FirstName, LastName, Title, Phone, Email FROM Contact ];
     }
 
-    @AuraEnabled
+    @AuraEnabled(cacheable=true)
     public static List<Contact> findContact(String searchKey) {
         String key = '%' + searchKey + '%';
-        return [SELECT FirstName FROM Contact WHERE Name LIKE :key LIMIT 5];
+        return [SELECT  Name
+        FROM Contact WHERE Name LIKE :key LIMIT 5];
     }
 
     @AuraEnabled

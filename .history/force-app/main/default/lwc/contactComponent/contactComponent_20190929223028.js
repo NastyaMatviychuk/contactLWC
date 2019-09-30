@@ -1,15 +1,15 @@
 import { LightningElement, wire, track, api } from 'lwc';
 import getContactList from '@salesforce/apex/contactComponentController.getContactList';
-import createContact from '@salesforce/apex/contactComponentController.createContact';
+//import findContact from '@salesforce/apex/contactComponentController.findContact';
 //import updateContact from '@salesforce/apex/contactComponentController.updateContact';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
-// import { createRecord } from 'lightning/uiRecordApi';
+import { createRecord } from 'lightning/uiRecordApi';
 import { updateRecord } from 'lightning/uiRecordApi';
 
 import { refreshApex } from '@salesforce/apex';
 //!!!!!!!!!!
-//import CONTACT_OBJECT from '@salesforce/schema/Contact';
+import CONTACT_OBJECT from '@salesforce/schema/Contact';
 import FIRSTNAME_FIELD from '@salesforce/schema/Contact.FirstName';
 import LASTNAME_FIELD from '@salesforce/schema/Contact.LastName';
 import TITLE_FIELD from '@salesforce/schema/Contact.Title';
@@ -69,15 +69,7 @@ export default class DatatableUpdateExample extends LightningElement {
     //         this.searchKey = searchKey;
     //     }, DELAY);
     // }
-//---------------------------------M O D A L    B O X    
-@track openmodel = false;
-    openmodal() {
-        this.openmodel = true;
-        window.console.log('it work');
-    }
-    closeModal() {
-        this.openmodel = false;
-    } 
+    
 //---------------------------------S O R T
 sortHendler(event) {
     this.sortBy = event.detail.fieldName;
@@ -137,53 +129,61 @@ this.data = parseData;
         });
     }
 //--------------------------C R E A T E   N E W
+    firstname = '';
+    lastname = '';
+    title = '';
+    phone = '';
+    email = '';
 
-    @track contactData = {
-        FirstName : FIRSTNAME_FIELD,
-        LastName : LASTNAME_FIELD,
-        Title : TITLE_FIELD,
-        Phone : PHONE_FIELD,
-        Email : EMAIL_FIELD
-    };
-
-    handleFirstNameChange(event) {
-        this.contactData.FirstName = event.target.value;
+    handleFirsrNameChange(event) {
+        this.contactId = undefined;
+        this.firstname = event.target.value;
     }
  
     handleLastNameChange(event){
-       this.contactData.LastName = event.target.value;
+        this.contactId = undefined;
+       this.lastname = event.target.value;
     }
     handleTitleChange(event) {
-        this.contactData.Title = event.target.value;
+        this.title = event.target.value;
     }
  
     handlePhoneChange(event){
-       this.contactData.Phone = event.target.value;
+       this.phone = event.target.value;
     }
     handleEmaillChange(event){
-        this.contactData.Email = event.target.value;
+        this.email = event.target.value;
     }
 
-    createContact() {
-        createContact({contact  : this.contactData})
-        .then(result => {
-            this.contactData = {};
-            window.console.log('result ===> ' + result);
-            this.dispatchEvent(new ShowToastEvent({
-                title: 'Success!!',
-                message: 'Contact created Successfully',
-                variant: 'success'
-            }),);
-        })
+    createAccount() {
+        const fields = {};
+        fields[FIRSTNAME_FIELD.fieldApiName] = this.firstname;
+        fields[LASTNAME_FIELD.fieldApiName] =this.lastname;
+        fields[TITLE_FIELD.fieldApiName] =this.title;
+        fields[PHONE_FIELD.fieldApiName] =this.phone;
+        fields[EMAIL_FIELD.fieldApiName] =this.email;
+
+
+        const recordInput = { apiName: CONTACT_OBJECT.objectApiName, fields };
+        createRecord(recordInput)
+            .then(contact => {
+                this.contactId = contact.id;
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: 'Success',
+                        message: 'Contact created',
+                        variant: 'success'
+                    })
+                );
+            })
             .catch(error => {
                 this.dispatchEvent(
                     new ShowToastEvent({
                         title: 'Error creating record',
-                        message: error.body.message,
+                        message: error.reduceErrors(error).join(', '),
                         variant: 'error'
                     })
                 );
             });
-            this.closeModal();
     }
 }

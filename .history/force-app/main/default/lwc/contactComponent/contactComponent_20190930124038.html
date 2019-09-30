@@ -3,10 +3,10 @@
                 <div class="slds-m-around_medium">
                     <template if:true={data}>
 
-                            <lightning-button class="slds-m-bottom_small  slds-align_absolute-center"
+                            <lightning-button class="slds-m-bottom_small slds-align_absolute-center"
                                 label="Create new contact" variant="brand" onclick={openmodal}>
                             </lightning-button>
-
+                            
                             <lightning-input type="search" 
                                 onchange={searchData}
                                 variant="label-hidden"
@@ -36,11 +36,11 @@
 
                 </div>
 
-                <!-- <template if:false={hasResults}>
+                <template if:false={hasResults}>
                     <div class="slds-align_absolute-center slds-m-vertical_small">
                         No matches
                     </div>
-                </template> -->
+                </template>
 
                 
                 <template if:true={openmodel}>

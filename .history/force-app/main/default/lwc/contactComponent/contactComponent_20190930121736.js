@@ -165,7 +165,7 @@ this.data = parseData;
     }
 
     createContact() {
-        createContact({contact  : this.contactData})
+        createContact({contact: this.contactData})
         .then(result => {
             this.contactData = {};
             window.console.log('result ===> ' + result);
