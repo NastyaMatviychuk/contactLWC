@@ -28,12 +28,12 @@
                                 variant="brand" 
                                 onclick={handleSearch}>
                             </lightning-button>
-
                             <div if:true={searchData}>
-                                <lightning-datatable data={searchData} 
-                                    columns={columns} 
-                                    key-field="id"
-                                    hide-checkbox-column="true"></lightning-datatable>
+
+                            <lightning-datatable data={searchData} 
+                                 columns={columns} 
+                                 key-field="id"
+                                 hide-checkbox-column="true"></lightning-datatable>
                             </div>
                         </div>
 

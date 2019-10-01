@@ -20,6 +20,7 @@
                                     class="slds-m-bottom_small"
                                     label="Search"
                                     placeholder="Search contact here"
+                                    
                                     >
                                 </lightning-input>
                             </div>
@@ -28,16 +29,8 @@
                                 variant="brand" 
                                 onclick={handleSearch}>
                             </lightning-button>
-
-                            <div if:true={searchData}>
-                                <lightning-datatable data={searchData} 
-                                    columns={columns} 
-                                    key-field="id"
-                                    hide-checkbox-column="true"></lightning-datatable>
-                            </div>
                         </div>
 
-                        <!-- <template if:false={searchData}> -->
                             <lightning-datatable 
                                 data={data}
                                 key-field="Id"
@@ -53,7 +46,7 @@
                                 hide-checkbox-column="true" 
                                 draft-values={draftValues}>
                         </lightning-datatable>
-                    <!-- </template> -->
+
                     </template>
 
                 </div>

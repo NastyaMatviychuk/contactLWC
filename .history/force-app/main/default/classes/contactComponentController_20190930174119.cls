@@ -5,13 +5,13 @@ public with sharing class contactComponentController {
         return [SELECT Id, FirstName, LastName, Title, Phone, Email FROM Contact ];
     }
 
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled
     public static List<Contact> findContact(String searchKey) {
-        searchKey = '%' + searchKey + '%';
-        List<Contact> searchedContact = new List<Contact>([SELECT Id, FirstName, LastName, Title, Phone, Email  FROM Contact WHERE FirstName LIKE :searchKey LIMIT 5]);
-            if(searchedContact.isEmpty()){
-                throw new AuraHandledException('Contact no found..');
-            }
+        String key = '%' + searchKey + '%';
+        List<Contact> searchedContact = new List<Contact>([SELECT Id, FirstName FROM Contact WHERE FirstName LIKE :key LIMIT 5]);
+        if(searchedContact.isEmpty()){
+            throw new AuraHandledException('No Found..');
+        }
         return searchedContact;
     }
 

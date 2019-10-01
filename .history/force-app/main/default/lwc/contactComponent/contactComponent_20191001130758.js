@@ -44,7 +44,7 @@ export default class DatatableUpdateExample extends LightningElement {
     @track searchData;
     @track errorMsg = '';
     strSearchAccName = '';
-    
+
     handleContactSearchName(event) {
         this.strSearchAccName = event.detail.value;
     }
@@ -82,7 +82,7 @@ handleSearch() {
     findContact({searchKey : this.strSearchAccName})
     .then(result => {
         result.forEach((record) => {
-            record.Name = '/' + record.Id;
+            record.AccName = '/' + record.Id;
         });
 
         this.searchData = result;
@@ -90,11 +90,11 @@ handleSearch() {
     })
     .catch(error => {
         this.searchData = undefined;
-        window.console.log('error =====> ' + JSON.stringify(error));
+        window.console.log('error =====> '+JSON.stringify(error));
         if(error) {
             this.errorMsg = error.body.message;
         }
-    }) 
+    })  
 }
 //---------------------------------S O R T
 sortHendler(event) {

@@ -25,7 +25,6 @@ public class controllerTestClass{
     public static void createContactTest(){
         Test.startTest();
             contactComponentController.createContact(new Contact(FirstName = 'FirstName', LastName = 'lastName'));
-       // System.assert( , 'zbs')
         Test.stopTest();
     }
 

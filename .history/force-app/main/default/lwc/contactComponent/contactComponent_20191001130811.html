@@ -9,19 +9,21 @@
                             </lightning-button>
 
                         <div class="slds-drig">
-
                             <div style="width: 600px" class="slds-col">
+
                                     <div if:true={errorMsg} style="margin-left: 3%;">
                                         <p style="color: red;">{errorMsg}</p>
                                     </div>
-                                <lightning-input type="text" 
-                                    onchange={handleContactSearchName}                                
-                                    variant="label-hidden"
-                                    class="slds-m-bottom_small"
-                                    label="Search"
-                                    placeholder="Search contact here"
-                                    >
-                                </lightning-input>
+
+                                    <lightning-input type="text" 
+                                        onchange={handleContactSearchName}                                
+                                        variant="label-hidden"
+                                        class="slds-m-bottom_small"
+                                        label="Search"
+                                        placeholder="Search contact here"
+                                        >
+                                    </lightning-input>
+                                    
                             </div>
 
                             <lightning-button label="Search" 
@@ -29,15 +31,14 @@
                                 onclick={handleSearch}>
                             </lightning-button>
 
-                            <div if:true={searchData}>
-                                <lightning-datatable data={searchData} 
+                            
+                                <lightning-datatable data={data} 
                                     columns={columns} 
                                     key-field="id"
-                                    hide-checkbox-column="true"></lightning-datatable>
-                            </div>
+                                    hide-checkbox-column="true">
+                                </lightning-datatable>
+                            
                         </div>
-
-                        <!-- <template if:false={searchData}> -->
                             <lightning-datatable 
                                 data={data}
                                 key-field="Id"
@@ -53,7 +54,6 @@
                                 hide-checkbox-column="true" 
                                 draft-values={draftValues}>
                         </lightning-datatable>
-                    <!-- </template> -->
                     </template>
 
                 </div>

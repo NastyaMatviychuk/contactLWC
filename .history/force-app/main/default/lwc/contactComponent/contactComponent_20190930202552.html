@@ -2,42 +2,28 @@
         <lightning-card title="Contact Comonent" >
                 <div class="slds-m-around_medium">
                     <template if:true={data} >
-
                         
+                        <div class="slds-drig">
                             <lightning-button class="slds-m-bottom_small slds-col slds-align_absolute-center"
                                 label="Create new contact" variant="brand" onclick={openmodal}>
                             </lightning-button>
 
-                        <div class="slds-drig">
-
                             <div style="width: 600px" class="slds-col">
-                                    <div if:true={errorMsg} style="margin-left: 3%;">
-                                        <p style="color: red;">{errorMsg}</p>
-                                    </div>
-                                <lightning-input type="text" 
+                                <lightning-input type="search" 
                                     onchange={handleContactSearchName}                                
                                     variant="label-hidden"
                                     class="slds-m-bottom_small"
                                     label="Search"
                                     placeholder="Search contact here"
-                                    >
+                                    value={searchTerm}>
                                 </lightning-input>
-                            </div>
-
-                            <lightning-button label="Search" 
-                                variant="brand" 
-                                onclick={handleSearch}>
-                            </lightning-button>
-
-                            <div if:true={searchData}>
-                                <lightning-datatable data={searchData} 
-                                    columns={columns} 
-                                    key-field="id"
-                                    hide-checkbox-column="true"></lightning-datatable>
                             </div>
                         </div>
 
-                        <!-- <template if:false={searchData}> -->
+                            <lightning-button label="Search" 
+                            variant="brand" 
+                            onclick={handleSearch}>
+                        </lightning-button>
                             <lightning-datatable 
                                 data={data}
                                 key-field="Id"
@@ -53,7 +39,7 @@
                                 hide-checkbox-column="true" 
                                 draft-values={draftValues}>
                         </lightning-datatable>
-                    <!-- </template> -->
+
                     </template>
 
                 </div>

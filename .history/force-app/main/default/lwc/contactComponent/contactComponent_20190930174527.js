@@ -1,7 +1,7 @@
 import { LightningElement, wire, track, api } from 'lwc';
 import getContactList from '@salesforce/apex/contactComponentController.getContactList';
 import createContact from '@salesforce/apex/contactComponentController.createContact';
-import findContact from '@salesforce/apex/contactComponentController.findContact';
+//import updateContact from '@salesforce/apex/contactComponentController.updateContact';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 // import { createRecord } from 'lightning/uiRecordApi';
@@ -29,7 +29,7 @@ import ID_FIELD from '@salesforce/schema/Contact.Id';
       
 export default class DatatableUpdateExample extends LightningElement {
     
-    
+    @track searchKey = '';
     @track sortBy;
     @track sortDirection;
 
@@ -39,15 +39,9 @@ export default class DatatableUpdateExample extends LightningElement {
 
     @track contactId;
     @api objectApiName;
-    @track searchData;
-
-    @track searchData;
-    @track errorMsg = '';
-    strSearchAccName = '';
+    // @api totalNumberOfRows;
     
-    handleContactSearchName(event) {
-        this.strSearchAccName = event.detail.value;
-    }
+    
 
     @wire(getContactList)
     contacts(result) {
@@ -61,6 +55,20 @@ export default class DatatableUpdateExample extends LightningElement {
         }
     }
 
+    // @wire(findContact, { searchKey: '$searchKey' })
+    //     contacts;
+    //     searchData(event){
+    //         // const searchKey = event.target.value;
+    //          this.searchKey = event.detail.searchKey ;
+    // }
+
+    // searchData(event) {
+    //     window.clearTimeout(this.delayTimeout);
+    //     const searchKey = event.target.value;
+    //     this.delayTimeout = setTimeout(() => {  
+    //         this.searchKey = searchKey;
+    //     }, DELAY);
+    // }
 //---------------------------------M O D A L    B O X    
 @track openmodel = false;
     openmodal() {
@@ -74,15 +82,15 @@ export default class DatatableUpdateExample extends LightningElement {
 //---------------------------------S E A R C H
 handleSearch() {
     if(!this.strSearchAccName) {
-        this.errorMsg = 'Please enter contact name to search.';
+        this.errorMsg = 'Please enter account name to search.';
         this.searchData = undefined;
         return;
     }
 
-    findContact({searchKey : this.strSearchAccName})
+    findContact({strAccName : this.strSearchAccName})
     .then(result => {
         result.forEach((record) => {
-            record.Name = '/' + record.Id;
+            record.AccName = '/' + record.Id;
         });
 
         this.searchData = result;
@@ -90,7 +98,7 @@ handleSearch() {
     })
     .catch(error => {
         this.searchData = undefined;
-        window.console.log('error =====> ' + JSON.stringify(error));
+        window.console.log('error =====> '+JSON.stringify(error));
         if(error) {
             this.errorMsg = error.body.message;
         }

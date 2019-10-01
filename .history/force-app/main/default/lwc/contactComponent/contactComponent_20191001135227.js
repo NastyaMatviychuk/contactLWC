@@ -82,7 +82,7 @@ handleSearch() {
     findContact({searchKey : this.strSearchAccName})
     .then(result => {
         result.forEach((record) => {
-            record.Name = '/' + record.Id;
+            record.FirstName = '/' + record.Id;
         });
 
         this.searchData = result;
