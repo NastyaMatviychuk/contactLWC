@@ -25,14 +25,19 @@ public class controllerTestClass{
     }
 
     @IsTest
-    public static void findContactTest(){
+    public static void findContactTestPositive(){
         Test.startTest();
-        String key = 'FirstName0';
-        List<Contact> findedContact = contactComponentController.findContact(key);
+        List<Contact> findedContact = contactComponentController.findContactTest('FirstName0');
         System.assert(findedContact.size() > 0, 'zbs');
         Test.stopTest();
     }
 
-    
+    @IsTest
+    public static void findContactTestNegative(){
+        Test.startTest();
+        List<Contact> findedContact = contactComponentController.findContactTest('Qkeffe');
+        System.assert(findedContact.size() > 0, 'zbs');
+        Test.stopTest();
+    }
     
 } 

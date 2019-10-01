@@ -6,6 +6,11 @@ public class controllerTestClass{
         List<Contact> contactsList = DataFactoryy.getContactss(10);
         insert contactsList;
     }
+  
+//   @IsTest
+//   public static void testt(){
+//       System.debug('test data ' + [SELECT ID, FirstName, LastName FROM Contact LIMIT 10]);
+//   }
 
     @IsTest
     public static void getContactTest(){
@@ -20,19 +25,9 @@ public class controllerTestClass{
     public static void createContactTest(){
         Test.startTest();
             contactComponentController.createContact(new Contact(FirstName = 'FirstName', LastName = 'lastName'));
-            // System.assert(  Contact. , 'zbs');
+       // System.assert( , 'zbs')
         Test.stopTest();
     }
 
-    @IsTest
-    public static void findContactTest(){
-        Test.startTest();
-        String key = 'FirstName0';
-        List<Contact> findedContact = contactComponentController.findContact(key);
-        System.assert(findedContact.size() > 0, 'zbs');
-        Test.stopTest();
-    }
-
-    
     
 } 

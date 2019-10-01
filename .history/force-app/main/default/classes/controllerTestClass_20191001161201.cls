@@ -28,7 +28,7 @@ public class controllerTestClass{
     public static void findContactTest(){
         Test.startTest();
         String key = 'FirstName0';
-        List<Contact> findedContact = contactComponentController.findContact(key);
+        List<Contact> findedContact = contactComponentController.findContactTest(key);
         System.assert(findedContact.size() > 0, 'zbs');
         Test.stopTest();
     }

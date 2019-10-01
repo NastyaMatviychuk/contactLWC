@@ -20,19 +20,15 @@ public class controllerTestClass{
     public static void createContactTest(){
         Test.startTest();
             contactComponentController.createContact(new Contact(FirstName = 'FirstName', LastName = 'lastName'));
-            // System.assert(  Contact. , 'zbs');
+           Contact.f
+            System.assert(  Contact. , 'zbs');
         Test.stopTest();
     }
 
     @IsTest
     public static void findContactTest(){
         Test.startTest();
-        String key = 'FirstName0';
-        List<Contact> findedContact = contactComponentController.findContact(key);
-        System.assert(findedContact.size() > 0, 'zbs');
-        Test.stopTest();
     }
 
-    
     
 } 
