@@ -2,28 +2,40 @@
         <lightning-card title="Contact Comonent" >
                 <div class="slds-m-around_medium">
                     <template if:true={data} >
-                        
-                        <div class="slds-drig">
-                            <lightning-button class="slds-m-bottom_small slds-col slds-align_absolute-center"
-                                label="Create new contact" variant="brand" onclick={openmodal}>
-                            </lightning-button>
-
-                            <div style="width: 600px" class="slds-col">
-                                <lightning-input type="search" 
-                                    onchange={handleContactSearchName}                                
-                                    variant="label-hidden"
-                                    class="slds-m-bottom_small"
-                                    label="Search"
-                                    placeholder="Search contact here"
-                                    value={searchTerm}>
-                                </lightning-input>
+                            <div if:true={errorMsg} style="margin-left: 3%;">
+                                    <p style="color: red;">{errorMsg}</p>
+                            </div>
+                        <div class="slds-grid slds-grid--pull-padded slds-align_absolute-center">
+                            <div style="width: 900px" class="slds-col--padded">
+                                    <lightning-input type="text" 
+                                        onchange={handleContactSearchName}                                
+                                        variant="label-hidden"
+                                        class="slds-m-bottom_small"
+                                        label="Search"
+                                        placeholder="Search contact here..." >
+                                    </lightning-input>
+                            </div>
+                            <div class="slds-col--padded slds-m-bottom_small">
+                                    <lightning-button label="Search" 
+                                        variant="brand" 
+                                        onclick={handleSearch}>
+                                    </lightning-button>
+                            </div>
+                            <div class="slds-col--padded">
+                                <lightning-button class="slds-m-bottom_small slds-col slds-align_absolute-center"
+                                    label="Create new contact" variant="brand" onclick={openmodal}>
+                                </lightning-button>
                             </div>
                         </div>
 
-                            <lightning-button label="Search" 
-                            variant="brand" 
-                            onclick={handleSearch}>
-                        </lightning-button>
+                            <div if:true={searchData}>
+                                <lightning-datatable data={searchData} 
+                                    columns={columns} 
+                                    key-field="id"
+                                    hide-checkbox-column="true"></lightning-datatable>
+                            </div>
+                        
+
                             <lightning-datatable 
                                 data={data}
                                 key-field="Id"
@@ -39,17 +51,9 @@
                                 hide-checkbox-column="true" 
                                 draft-values={draftValues}>
                         </lightning-datatable>
-
                     </template>
 
                 </div>
-
-                <!-- <template if:false={hasResults}>
-                    <div class="slds-align_absolute-center slds-m-vertical_small">
-                        No matches
-                    </div>
-                </template> -->
-
                 
                 <template if:true={openmodel}>
                     <div class="demo-only" style="height: 640px;">
